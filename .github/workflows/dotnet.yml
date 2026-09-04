@@ -16,12 +16,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify checkout
-        run: |
-          git status
-          dir
-          dir WebCode
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
