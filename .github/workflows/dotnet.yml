@@ -1,0 +1,34 @@
+name: .NET CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify checkout
+        run: |
+          git status
+          dir
+          dir WebCode
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore WebCode/WebCode.sln
+
+      - name: Build
+        run: dotnet build WebCode/WebCode.sln --configuration Release --no-restore
